@@ -1,6 +1,6 @@
 // EXT
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, View, Text, ActivityIndicator, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, Share, Platform, Text, ActivityIndicator, ScrollView, Image, TouchableOpacity } from 'react-native';
 
 // INT
 import styles from'../Styles/FilmDetails.js';
@@ -37,6 +37,35 @@ export default function FilmDetails(props) {
 		}
 		return values
 	}
+
+  function displayFavIcon(){
+    var sourceImage = require('../assets/Icons/ic_favorite_border.png')
+    if (context.favoritesFilm.findIndex(item => item.id === film.id) !== -1){
+      sourceImage = require('../assets/Icons/ic_favorite.png')
+    }
+    return(
+      <Image
+        source={sourceImage}
+        style={styles.favIcon}
+      />
+    )
+  }
+
+  function shareFilm(){
+    Share.share({title: film.title, message: film.overview})
+  }
+
+  function displayShareFloatingButton(){
+    if (film != undefined && Platform.OS === 'android'){
+      return (
+        <TouchableOpacity
+        style={styles.shareButton}
+        onPress={() => shareFilm()}>
+          <Image style={{height: 35, width: 35}} source={require('../assets/Icons/share.png')}/>
+        </TouchableOpacity>
+      )
+    }
+  }
 
 	useEffect(() => {
 		getFilmDetailsFromApi(film.id).then(data => {
@@ -99,7 +128,7 @@ export default function FilmDetails(props) {
 
 					</ScrollView>
 			}
-
+      {displayShareFloatingButton()}
 		</View>
 	)
 }
