@@ -22,12 +22,26 @@ export default function FilmDetails(props) {
 	const [isLoading, setisLoading] = useState(true)
 	const [filmDetails, setFilmDetails] = useState(null)
 
+  // STATIC  (à vérifier sur IOS / Le static n'existe plus en react native 5.x / Je ne sais pas comment changer la navigationOptions dans la navigation)
+  const navigationOptions = ({ navigation }) => {
+      if (film != undefined && Platform.OS === 'ios') {
+        return {
+            headerRight: <TouchableOpacity
+                            style={styles.shareIOS_HeaderRightButton}
+                            onPress={() => params.shareFilm()}>
+                            <Image
+                              style={styles.share_ios}
+                              source={require('../assets/Icons/share_ios.png')} />
+                          </TouchableOpacity>
+        }
+      }
+  }
+
 	// FUNCTIONS
 	function getNamesFromArray (target) {
 
 		let dataArray = filmDetails[target];
 		let values = ""
-
 		for (let i = 0; i < dataArray.length; i++) {
 		  if ( i != dataArray.length - 1) {
 		  	values += dataArray[i].name + ", "
