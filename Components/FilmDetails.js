@@ -1,6 +1,6 @@
 // EXT
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, View, Text, ActivityIndicator, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Animated, View, Text, ActivityIndicator, ScrollView, Image, TouchableOpacity } from 'react-native';
 
 // INT
 import styles from'../Styles/FilmDetails.js';
@@ -17,6 +17,8 @@ export default function FilmDetails(props) {
 	// CONSTANTS
 	const navigation = props.navigation
 	const film = props.route.params.film
+  const iconWidth = new Animated.Value(55)
+  const iconHeight = new Animated.Value(50)
 
 	// STATES
 	const [isLoading, setisLoading] = useState(true)
@@ -45,11 +47,23 @@ export default function FilmDetails(props) {
     var sourceImage = require('../assets/Icons/ic_favorite_border.png')
     if (context.favoritesFilm.findIndex(item => item.id === film.id) !== -1){
       sourceImage = require('../assets/Icons/ic_favorite.png')
+      Animated.spring(
+        iconWidth,{
+          toValue: 77,
+          bounciness: 15
+        }
+      ).start()
+      Animated.spring(
+        iconHeight,{
+          toValue: 70,
+          bounciness: 20
+        }
+      ).start()
     }
     return(
-      <Image
+      <Animated.Image
         source={sourceImage}
-        style={styles.favIcon}
+        style={{marginTop: 15, width: iconWidth, height: iconHeight}}
       />
     )
   }
