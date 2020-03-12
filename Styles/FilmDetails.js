@@ -29,11 +29,11 @@ export default styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
-  favIcon:{
-    marginTop: 15,
-    width: 55,
-    height: 50
-  },
+  // favIcon:{
+  //   marginTop: 15,
+  //   width: 55,
+  //   height: 50
+  // },
   descriptionFilm:{
     color: '#fff',
     margin: 20,
