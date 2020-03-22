@@ -3,14 +3,14 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 
 //INT
-import Favorite from '../Components/Favorite'
-import FilmDetails from '../Components/FilmDetails'
+import Favorite from '../Components/Favorite/Favorite'
+import FilmDetails from '../Components/Details/FilmDetails'
 
 const Stack = createStackNavigator();
 
 export default function Navigator() {
   return (
-    
+
     <Stack.Navigator
       screenOptions={{
         headerStyle: {

@@ -3,34 +3,29 @@ import React, { useState, useRef, useContext } from 'react';
 import {TextInput, Text, View ,SafeAreaView, TouchableOpacity, FlatList, Image, ActivityIndicator} from 'react-native';
 
 // From PROJECT
-import styles from'../Styles/Search.js'
-import FilmItem from'./FilmItem.js'
-import { getFilmsFromApiWithSearchedText } from'../API/TMDBapi.js'
-import { SearchLocals } from '../shared/Locals'
-import FavContext from '../Context/FavContext.js'
+import styles from'./SearchStyle'
+import FilmItem from'./FilmItem'
+import FavContext from '../../Context/FavContext.js'
+import Locals from './SearchLocals'
+import { getFilmsFromApiWithSearchedText } from'../../API/TMDBapi'
 
 export default function Search({navigation}) {
 
   // STATES
-
   const [aflam, setaflam] = useState([])
   const [isLoading, setisLoading]= useState(false)
 
   // REFERENCES
-
   const searchedText = useRef(null)
   const page = useRef(0)
   const totalPage = useRef(0)
 
   // FUNCTIONS
-
   function searchedTextChanging(text){
-
     searchedText.current = text;
   }
 
   function loadNewPage() {
-
     setisLoading(true);
     getFilmsFromApiWithSearchedText(searchedText.current, page.current +1)
       .then(data => {
@@ -42,7 +37,6 @@ export default function Search({navigation}) {
 
   function newSearch() {
     if (!isLoading && searchedText.current) {
-
       setisLoading(true);
       getFilmsFromApiWithSearchedText(searchedText.current, 1)
         .then(data => {
@@ -56,12 +50,10 @@ export default function Search({navigation}) {
     }
   }
 
-
   // RENDER
-
   return (
     <SafeAreaView style={styles.container}>
-      <Image source={require('../assets/Logo.png')}  style={styles.Logo}/>
+      <Image source={require('../../assets/Logo.png')}  style={styles.Logo}/>
       <TextInput
         onSubmitEditing={() => newSearch()}
         onChangeText={(text) => searchedTextChanging(text)}
@@ -70,7 +62,7 @@ export default function Search({navigation}) {
         placeholderTextColor="#888"
       />
       <TouchableOpacity style={styles.btnSearch} title='Search' onPress={() => newSearch()}>
-        <Text  style={styles.btnText}> {SearchLocals.Search} </Text>
+        <Text  style={styles.btnText}> {Locals.Search} </Text>
       </TouchableOpacity>
 
       { page.current > 0 &&

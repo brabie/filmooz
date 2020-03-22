@@ -4,7 +4,8 @@ import { Animated, Image, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
 // INT
-import FavContext from '../Context/FavContext.js'
+import FavContext from '../../Context/FavContext.js'
+import Style from './FavIconStyle.js'
 
 export default function FavIcon({film}){
 
@@ -21,10 +22,10 @@ export default function FavIcon({film}){
 
   // LOGIC
   if ( context.films.findIndex(item => item.id === film.id) !== -1) {
-    sourceImage = require('../assets/Icons/ic_favorite.png');
+    sourceImage = require('../../assets/Icons/ic_favorite.png');
     Animate(defaultDimensions, favoriteDimensions);
   } else {
-    sourceImage = require('../assets/Icons/ic_favorite_border.png');
+    sourceImage = require('../../assets/Icons/ic_favorite_border.png');
     Animate(favoriteDimensions, defaultDimensions);
   }
 
@@ -33,12 +34,12 @@ export default function FavIcon({film}){
     iconWidth = new Animated.Value(A[0])
     iconHeight = new Animated.Value(A[1])
     Animated.spring( iconWidth, { toValue: B[0] } ).start()
-    Animated.spring( iconHeight, { toValue: B[1]} ).start()
+    Animated.spring( iconHeight, { toValue: B[1] } ).start()
   }
 
   return(
     <TouchableOpacity
-      style={{alignItems: 'center', marginTop: 10}}
+      style={Style.container}
       onPress={() => context.toggleFav(film)}>
            <Animated.Image
                 source={sourceImage}

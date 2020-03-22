@@ -1,7 +1,10 @@
+// EXT
 import React, {useState, useEffect} from 'react'
 import { View, Image, Text, TouchableOpacity, Animated, Dimensions } from 'react-native'
-import { getImage } from '../API/TMDBapi'
-import styles from'../Styles/FilmItem'
+
+// INT
+import { getImage } from '../../API/TMDBapi'
+import styles from'./FilmItemStyle'
 
 export default function FilmItem(props){
 
@@ -13,14 +16,10 @@ export default function FilmItem(props){
   const item = props.film
   const displayDetailforFilm = props.displayDetailforFilm
 
+
   useEffect(() => {
     Animated.spring(
-      leftPosition,
-      {
-        toValue: 0,
-        speed: 1
-      }
-    ).start()
+      leftPosition, { toValue: 0, speed: 8, bounciness: 20 } ).start()
   }, []);
 
   return(
