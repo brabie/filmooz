@@ -8,11 +8,9 @@ import FavReducer from './Context/FavReducer.js'
 
 export default function App() {
 
-	const initialState = { favoritesFilm :  [] }
+	const initialState = []
 
 	const [state, dispach] = useReducer(FavReducer, initialState)
-
-	//console.log(FavReducer.toString())
 
 	const toggleFav = (film) => {
 		dispach({
@@ -22,7 +20,7 @@ export default function App() {
 	}
 
 	return (
-		<FavContext.Provider value={{favoritesFilm: state.favoritesFilm, toggleFav}}>
+		<FavContext.Provider value={{films: state, toggleFav}}>
 			<Navigator/>
 		</FavContext.Provider>
 	);
