@@ -1,32 +1,43 @@
+
+import {AsyncStorage} from 'react-native';
+
 const Toggle_Fav = 'TOGGLE_FAV'
+const Init_Fav = 'INIT_FAV'
 
 const toggleFav = (film, state) => {
-	
+
 	let nextState;
-	const favoriteFilmIndex = state.favoritesFilm.findIndex(item => item.id === film.id)
+	let filmEssentials = { id: film.id, title: film.title, poster_path: film.poster_path}
+	let favoriteFilmIndex = state.findIndex(item => item.id === film.id)
 
 	if (favoriteFilmIndex !== -1) {
-		nextState = {
-			...state,
-			favoritesFilm: state.favoritesFilm.filter( (item, index) => index !== favoriteFilmIndex)
-		}
+		nextState = state.filter( (item, index) => index !== favoriteFilmIndex)
 	}
 	else {
-		nextState = {
-			...state,
-			favoritesFilm: [...state.favoritesFilm, film]
-		}
+		nextState = [...state, filmEssentials]
 	}
- 	return nextState || state
 
+	AsyncStorage.setItem('favorite', JSON.stringify(nextState || state))
+
+ 	return nextState || state
+}
+
+const initFav = (films, state) => {
+
+	//console.log(state)
+
+	let nextState = films
+
+ 	return nextState || state
 }
 
 export default (state, action) => { // action = type + valeur
 	switch(action.type){
 		case Toggle_Fav:
-
 			return toggleFav(action.payload, state)
+		case Init_Fav:
+		  return initFav(action.payload, state)
 		default :
 			return state
 	}
-} 
+}

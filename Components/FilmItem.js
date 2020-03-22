@@ -18,7 +18,6 @@ export default function FilmItem(props){
       leftPosition,
       {
         toValue: 0,
-        bounciness: 10,
         speed: 1
       }
     ).start()

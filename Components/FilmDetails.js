@@ -73,7 +73,7 @@ export default function FilmDetails(props) {
 							<Text style={styles.DetailsText}> { FilmDetailsLocals.Number_of_votes } :  {filmDetails.popularity} </Text>
 							<Text style={styles.DetailsText}> { FilmDetailsLocals.Release_date } :  {filmDetails.release_date} </Text>
 							<Text style={styles.DetailsText}> { FilmDetailsLocals.Type } :  {getNamesFromArray('genres')} </Text>
-							{ getNamesFromArray('production_companies').length !== 0 ? <Text style={styles.DetailsText}> { FilmDetailsLocals.Company } :  {getNamesFromArray('production_companies')} </Text> : <></>}
+							{ getNamesFromArray('production_companies') ? <Text style={styles.DetailsText}> { FilmDetailsLocals.Company } :  {getNamesFromArray('production_companies')} </Text> : <></>}
 						</View>
 
 					</ScrollView>

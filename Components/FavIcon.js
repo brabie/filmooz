@@ -20,7 +20,7 @@ export default function FavIcon({film}){
   const favoriteDimensions = [77, 70]
 
   // LOGIC
-  if ( context.favoritesFilm.findIndex(item => item.id === film.id) !== -1) {
+  if ( context.films.findIndex(item => item.id === film.id) !== -1) {
     sourceImage = require('../assets/Icons/ic_favorite.png');
     Animate(defaultDimensions, favoriteDimensions);
   } else {
