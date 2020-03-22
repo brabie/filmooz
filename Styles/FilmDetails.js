@@ -57,5 +57,17 @@ export default styles = StyleSheet.create({
     padding: 15,
     fontSize: 20,
     fontWeight: 'bold'
+  },
+  shareButton:{
+    backgroundColor: '#d01616',
+    padding: 20,
+    position: 'absolute',
+    height: 60,
+    width: 60,
+    borderRadius: 30,
+    right: 30,
+    bottom: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
