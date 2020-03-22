@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 // INT
 import StackNavigationSearch from './StackNavigationSearch'
 import StackNavigationFav from './StackNavigationFav'
-import Account from '../Components/Account'
+import Account from '../Components/Account/Account'
 
 const Tab = createMaterialBottomTabNavigator();
 

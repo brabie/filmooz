@@ -3,15 +3,15 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 
 //INT
-import Search from '../Components/Search'
-import FilmDetails from '../Components/FilmDetails'
+import Search from '../Components/Search/Search'
+import FilmDetails from '../Components/Details/FilmDetails'
 
 const Stack = createStackNavigator();
 
 export default function Navigator() {
-  
+
   return (
-    
+
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
