@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 export default styles = StyleSheet.create({
   container: {
@@ -16,15 +16,14 @@ export default styles = StyleSheet.create({
   },
   imageFilm:{
     flex: 1,
-    width: '100%',
-    height : 520,
+    height : 380,
     backgroundColor: '#1c1c1c',
-    alignItems: 'center',
-    justifyContent: 'center'
+    marginHorizontal: 50,
+    marginTop: 20
   },
   Title:{
     color: '#d01616',
-    marginTop: 20,
+    marginVertical: 20,
     fontWeight: 'bold',
     fontSize: 20,
     textAlign: 'center',
@@ -42,20 +41,12 @@ export default styles = StyleSheet.create({
     elevation: 50
   },
 
-  Vote:{
+  DetailsText:{
     color: '#fff',
-    textAlign: 'center'
   },
-  Popularity:{
-    color: '#fff',
-    textAlign: 'center'
-  },
-  dateFilm:{
-    color: '#fff',
-    textAlign: 'center'
-  },
-  Numbers:{
-    marginBottom: '15%',
+  Details:{
+    marginLeft: 50,
+    marginVertical: 20
   },
   btnBack:{
     backgroundColor: '#d01616',

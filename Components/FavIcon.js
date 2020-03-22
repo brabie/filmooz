@@ -1,44 +1,49 @@
+// EXT
 import React, {useContext} from 'react'
 import { Animated, Image, TouchableOpacity } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
 
+// INT
 import FavContext from '../Context/FavContext.js'
 
 export default function FavIcon({film}){
 
-  console.log('FavIcon', film)
-
+  // CONTEXT
   const context = useContext(FavContext)
 
-  const iconWidth = new Animated.Value(55)
-  const iconHeight = new Animated.Value(50)
-
+  // CONTANTS
   let sourceImage
+  let iconWidth
+  let iconHeight
 
-  if (context.favoritesFilm.findIndex(item => item.id === film.id) !== -1) {
-    sourceImage = require('../assets/Icons/ic_favorite.png')
-    Animated.spring(
-      iconWidth,{
-        toValue: 77,
-        bounciness: 15
-      }
-    ).start()
-    Animated.spring(
-      iconHeight,{
-        toValue: 70,
-        bounciness: 20
-      }
-    ).start()
+  const defaultDimensions = [55, 50]
+  const favoriteDimensions = [77, 70]
+
+  // LOGIC
+  if ( context.favoritesFilm.findIndex(item => item.id === film.id) !== -1) {
+    sourceImage = require('../assets/Icons/ic_favorite.png');
+    Animate(defaultDimensions, favoriteDimensions);
   } else {
-    sourceImage = require('../assets/Icons/ic_favorite_border.png')
+    sourceImage = require('../assets/Icons/ic_favorite_border.png');
+    Animate(favoriteDimensions, defaultDimensions);
+  }
+
+  // FUNCTIONS
+  function Animate ( A, B ) {
+    iconWidth = new Animated.Value(A[0])
+    iconHeight = new Animated.Value(A[1])
+    Animated.spring( iconWidth, { toValue: B[0] } ).start()
+    Animated.spring( iconHeight, { toValue: B[1]} ).start()
   }
 
   return(
     <TouchableOpacity
-      style={{alignItems: 'center'}}
+      style={{alignItems: 'center', marginTop: 10}}
       onPress={() => context.toggleFav(film)}>
            <Animated.Image
                 source={sourceImage}
-                style={{marginTop: 15, width: iconWidth, height: iconHeight}}/>
+                style={{width: iconWidth, height: iconHeight}}
+            />
     </ TouchableOpacity>
   );
 }

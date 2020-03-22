@@ -1,6 +1,6 @@
 // From REACT
 import React, { useState, useRef, useContext } from 'react';
-import {TextInput, Text, View ,TouchableOpacity, FlatList, Image, ActivityIndicator} from 'react-native';
+import {TextInput, Text, View ,SafeAreaView, TouchableOpacity, FlatList, Image, ActivityIndicator} from 'react-native';
 
 // From PROJECT
 import styles from'../Styles/Search.js'
@@ -60,13 +60,14 @@ export default function Search({navigation}) {
   // RENDER
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image source={require('../assets/Logo.png')}  style={styles.Logo}/>
       <TextInput
         onSubmitEditing={() => newSearch()}
         onChangeText={(text) => searchedTextChanging(text)}
         style={styles.txtinput}
-        PlaceHolder="Search a film..."
+        placeholder="Search a film..."
+        placeholderTextColor="#888"
       />
       <TouchableOpacity style={styles.btnSearch} title='Search' onPress={() => newSearch()}>
         <Text  style={styles.btnText}> {SearchLocals.Search} </Text>
@@ -85,8 +86,8 @@ export default function Search({navigation}) {
         />
       }
       { isLoading &&
-        <ActivityIndicator size="large" color="#d01616" />
+            <ActivityIndicator size="large" color="#d01616"  />
       }
-    </View>
+    </SafeAreaView>
   );
 }

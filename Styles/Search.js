@@ -5,11 +5,10 @@ export default styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
     alignItems: 'center',
-    width: '100%',
-  //  height: 190,
+    width: '100%'
   },
   txtinput: {
-    marginTop: 40,
+    marginTop: 10,
     backgroundColor : '#1c1c1c',
     color: '#fff',
     width: 340,
@@ -30,8 +29,9 @@ export default styles = StyleSheet.create({
     color:'#fff'
   },
   Logo: {
-    marginTop:60,
+    marginTop:30,
     height: 50,
     width: 220
   }
+
 });

@@ -11,8 +11,8 @@ import FavIcon from './FavIcon'
 
 export default function FilmDetails(props) {
 
-  	// CONTEXT
-  	const context = useContext(FavContext)
+	// CONTEXT
+	const context = useContext(FavContext)
 
 	// CONSTANTS
 	const navigation = props.navigation
@@ -20,17 +20,16 @@ export default function FilmDetails(props) {
 
 	// STATES
 	const [isLoading, setisLoading] = useState(true)
-	const [filmAdditionalDetails, setFilmAdditionalDetails] = useState(null)
+	const [filmDetails, setFilmDetails] = useState(null)
 
 	// FUNCTIONS
 	function getNamesFromArray (target) {
 
-		let dataArray = filmAdditionalDetails[target];
+		let dataArray = filmDetails[target];
 		let values = ""
 
 		for (let i = 0; i < dataArray.length; i++) {
 		  if ( i != dataArray.length - 1) {
-		  	//console.log(dataArray[i])
 		  	values += dataArray[i].name + ", "
 		  } else {
 		  	values += dataArray[i].name
@@ -41,7 +40,7 @@ export default function FilmDetails(props) {
 
 	useEffect(() => {
 		getFilmDetailsFromApi(film.id).then(data => {
-			setFilmAdditionalDetails(data)
+			setFilmDetails(data)
 			setisLoading(false)
 		})
 	}, []);
@@ -54,25 +53,29 @@ export default function FilmDetails(props) {
 				</View>
 			}
 			{
-				filmAdditionalDetails ?
+				filmDetails ?
 					<ScrollView Style={styles.SV_Container}>
 
 						<Image
 							style={styles.imageFilm}
-							source={{uri: getImage(film.poster_path)}}
+							source={{uri: getImage(filmDetails.poster_path)}}
 						/>
-						<Text style={styles.Title}> {film.title} </Text>
-					 
-					    <FavIcon film={film}/>
-					  
-						<Text style={styles.descriptionFilm}> {film.overview} </Text>
-						<View style={styles.Numbers}>
-							<Text style={styles.Vote}> { FilmDetailsLocals.Average_Votes } :  {film.vote_average} / 10 </Text>
-							<Text style={styles.Popularity}> { FilmDetailsLocals.Number_of_votes } :  {film.popularity} </Text>
-							<Text style={styles.dateFilm}> { FilmDetailsLocals.Release_date } :  {film.release_date} </Text>
-							<Text style={styles.dateFilm}> { FilmDetailsLocals.Type } :  {getNamesFromArray('genres')} </Text>
-							<Text style={styles.dateFilm}> { FilmDetailsLocals.Company } :  {getNamesFromArray('production_companies')} </Text>
+
+						<Text style={styles.Title}> {filmDetails.title} </Text>
+
+					  <FavIcon film={filmDetails}/>
+
+						{ filmDetails.overview ? <Text style={styles.descriptionFilm}> {filmDetails.overview} </Text> : <></>}
+
+
+						<View style={styles.Details}>
+							<Text style={styles.DetailsText}> { FilmDetailsLocals.Average_Votes } :  {filmDetails.vote_average} / 10 </Text>
+							<Text style={styles.DetailsText}> { FilmDetailsLocals.Number_of_votes } :  {filmDetails.popularity} </Text>
+							<Text style={styles.DetailsText}> { FilmDetailsLocals.Release_date } :  {filmDetails.release_date} </Text>
+							<Text style={styles.DetailsText}> { FilmDetailsLocals.Type } :  {getNamesFromArray('genres')} </Text>
+							{ getNamesFromArray('production_companies').length !== 0 ? <Text style={styles.DetailsText}> { FilmDetailsLocals.Company } :  {getNamesFromArray('production_companies')} </Text> : <></>}
 						</View>
+
 					</ScrollView>
 
 				:
@@ -83,13 +86,17 @@ export default function FilmDetails(props) {
 							style={styles.imageFilm}
 							source={{uri: getImage(film.poster_path)}}
 						/>
+
 						<Text style={styles.Title}> {film.title} </Text>
+
 						<Text style={styles.descriptionFilm}> {film.overview} </Text>
-						<View style={styles.Numbers}>
-							<Text style={styles.Vote}> { FilmDetailsLocals.Average_Votes } :  {film.vote_average} / 10 </Text>
-							<Text style={styles.Popularity}> { FilmDetailsLocals.Number_of_votes } :  {film.popularity} </Text>
-							<Text style={styles.dateFilm}> { FilmDetailsLocals.Release_date } :  {film.release_date} </Text>
+
+						<View style={styles.Details}>
+							<Text style={styles.DetailsText}> { FilmDetailsLocals.Average_Votes } :  {film.vote_average} / 10 </Text>
+							<Text style={styles.DetailsText}> { FilmDetailsLocals.Number_of_votes } :  {film.popularity} </Text>
+							<Text style={styles.DetailsText}> { FilmDetailsLocals.Release_date } :  {film.release_date} </Text>
 						</View>
+
 					</ScrollView>
 			}
 
