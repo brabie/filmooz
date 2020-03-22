@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Blank Template",
-    "slug": "1stDevRN",
+    "name": "Filmooz",
+    "slug": "",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -9,7 +9,7 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -25,6 +25,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.randi.filmooz",
+      "versionCode": 1
     }
   }
 }
